@@ -54,22 +54,27 @@ return CMap::mergeArray(
 			'application.controllers.*',
 			'application.models.*'
 		),
-		/* uncomment and set if required */
+    
+		/* uncomment and set if required */    
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
-		/* 'modules' => array(), */
-		'components' => array(
+		'modules' => CMap::mergeArray($params['modules.common'], array(
+          //specify  your frontend specific modules here
+          )
+      ),
+    'components' => CMAP::mergeArray($params['components.common'], array(
+      //specify our frontend specific components here
 			'errorHandler' => array(
 				// @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
 				'errorAction'=>'site/error'
 			),
-//			'db' => array(
-//				'connectionString' => $params['db.connectionString'],
-//				'username' => $params['db.username'],
-//				'password' => $params['db.password'],
-//				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-//				'enableParamLogging' => YII_DEBUG,
-//				'charset' => 'utf8'
-//			),
+			'db' => array(
+				'connectionString' => $params['db.connectionString'],
+				'username' => $params['db.username'],
+				'password' => $params['db.password'],
+				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
+				'enableParamLogging' => YII_DEBUG,
+				'charset' => 'utf8'
+			),
 			'urlManager' => array(
 				'urlFormat' => 'path',
 				'showScriptName' => false,
@@ -79,7 +84,7 @@ return CMap::mergeArray(
 			/* make sure you have your cache set correctly before uncommenting */
 			/* 'cache' => $params['cache.core'], */
 			/* 'contentCache' => $params['cache.content'] */
-		),
+		)),
 	),
 	CMap::mergeArray($mainEnvConfiguration, $mainLocalConfiguration)
 );

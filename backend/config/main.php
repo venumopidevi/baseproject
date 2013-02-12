@@ -31,7 +31,7 @@ $mainEnvConfiguration = file_exists($mainEnvFile) ? require($mainEnvFile) : arra
 
 return CMap::mergeArray(
 	array(
-		'name' => 'Clevertech Backend Boilerplate',
+		'name' => 'Base Project Backend Boilerplate',
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
 		'basePath' => 'backend',
 		// set parameters
@@ -61,18 +61,16 @@ return CMap::mergeArray(
 			'application.controllers.*',
 			'application.models.*'
 		),
-		/* uncomment and set if required */
-		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
-		/* 'modules' => array(
-			'gii' => array(
-				'class' => 'system.gii.GiiModule',
-				'password' => 'clevertech',
-				'generatorPaths' => array(
-					'bootstrap.gii'
-				)
-			)
-		), */
-		'components' => array(
+    /* uncomment and set if required */
+    'modules' => CMap::mergeArray($params['modules.common'], array(
+        //specify  your frontend specific modules here
+//        'language' => array(
+//          'class' => 'backend.modules.language.LanguageModule',
+//        ),
+          )
+      ),
+		'components' => CMAP::mergeArray($params['components.common'], array(
+      //specify our frontend specific components here
 			'user' => array(
 				'allowAutoLogin'=>true,
 			),
@@ -102,7 +100,7 @@ return CMap::mergeArray(
 			/* make sure you have your cache set correctly before uncommenting */
 			/* 'cache' => $params['cache.core'], */
 			/* 'contentCache' => $params['cache.content'] */
-		),		
+		)),		
 	),
 	CMap::mergeArray($mainEnvConfiguration, $mainLocalConfiguration)
 );
