@@ -1,5 +1,5 @@
 # YiiBoilerplate
-We use this folder structure setup on [Clevertech](http://www.clevertech.biz) for our own projects. 
+We use this folder structure setup for our own projects. 
 
 ### Overview
 
