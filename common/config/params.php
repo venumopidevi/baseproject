@@ -53,9 +53,37 @@ return CMap::mergeArray(array(
        */
       'components.common' => array(
         //specify  our common components here
+        /*
+         * Commonly used functions for filesystem objects manipulation 
+         */
         'file' => array(
           'class' => 'common.extensions.cfile.CFile',
         ),
+        /*
+         * TWIG Template renderer[start]
+         */
+        'viewRenderer' => array(
+          'class' => 'common.extensions.ETwigViewRenderer',
+          'twigPathAlias' => 'common.extensions.Twig',
+          // All parameters below are optional, change them to your needs
+          // using .php is not recommended,either .html,.twig or .tpl
+          'fileExtension' => '.twig', //template file extension
+          'options' => array(
+            'autoescape' => true,
+          ),
+          'globals' => array(
+            'html' => 'CHtml'
+          ),
+          'functions' => array(
+            'rot13' => 'str_rot13',
+          ),
+          'filters' => array(
+            'jencode' => 'CJSON::encode',
+          ),
+        ),
+      /*
+       * TWIG Template renderer[End]
+       */
       ),
       /*
        * Add our Common modules here
