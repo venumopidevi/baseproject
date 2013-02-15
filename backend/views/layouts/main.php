@@ -68,7 +68,7 @@
 		<?php echo $content; ?>
 		<hr/>
 		<div id="footer">
-			Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+			Copyright &copy; <?php echo date('Y'); ?> by Hidden Brains.<br/>
 			All Rights Reserved.<br/>
 			<?php echo Yii::powered(); ?>
 		</div>

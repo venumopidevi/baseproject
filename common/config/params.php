@@ -52,7 +52,10 @@ return CMap::mergeArray(array(
        * Required: Specify QDP of our component/extension class
        */
       'components.common' => array(
-      //specify  our common components here
+        //specify  our common components here
+        'file' => array(
+          'class' => 'common.extensions.cfile.CFile',
+        ),
       ),
       /*
        * Add our Common modules here
