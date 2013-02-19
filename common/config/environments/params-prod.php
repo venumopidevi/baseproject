@@ -28,6 +28,7 @@ return array(
 	'db.connectionString' => 'mysql:host=localhost;dbname=baseproject',
 	'db.username' => 'root',
 	'db.password' => '',
+  'db.tablePrefix' => 'base_',
 
 	// test database {
 	'testdb.name' => '',

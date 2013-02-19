@@ -120,7 +120,8 @@ class SiteController extends Controller
 		if (isset($_POST['LoginForm']))
 		{
 			$model->attributes = $_POST['LoginForm'];
-			if ($model->validate(array('username', 'password', 'verifyCode')) && $model->login())
+			// if ($model->validate(array('username', 'password', 'verifyCode')) && $model->login())
+			if ($model->validate(array('username', 'password')) && $model->login())
 				$this->redirect(user()->returnUrl);
 		}
 

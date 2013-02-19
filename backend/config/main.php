@@ -85,6 +85,7 @@ return CMap::mergeArray(
           'connectionString' => $params['db.connectionString'],
           'username' => $params['db.username'],
           'password' => $params['db.password'],
+          'tablePrefix' => $params['db.tablePrefix'],
           'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
           'enableParamLogging' => YII_DEBUG,
           'charset' => 'utf8'
