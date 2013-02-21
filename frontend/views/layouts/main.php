@@ -42,6 +42,7 @@
 
 <body>
 <div class="container">
+    <?php $this->widget('common.widgets.LanguageSelector'); ?>
 	<?php echo $content?>
 </div>
 

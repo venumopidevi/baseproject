@@ -36,14 +36,16 @@ return CMap::mergeArray(
       // @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
       'basePath' => 'backend',
       // set parameters
-      'params' => $params,
+      //set your backend specific params here
+      'params' => CMap::mergeArray($params, array(
+      )),
       // preload components required before running applications
       // @see http://www.yiiframework.com/doc/api/1.1/CModule#preload-detail
       'preload' => array('bootstrap', 'log'),
       // @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail
-      'language' => 'en',
+      // 'language' => 'en',          
       // using bootstrap theme ? not needed with extension
-//		'theme' => 'bootstrap',
+      // 'theme' => 'bootstrap',
       // setup import paths aliases
       // @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
       'import' => array(
@@ -64,11 +66,19 @@ return CMap::mergeArray(
       ),
       /* uncomment and set if required */
       'modules' => CMap::mergeArray($params['modules.common'], array(
-          //specify  our backend specific modules here
+        //specify  our backend specific modules here
+        'language' => array(
+          'class' => 'application.modules.Language.LanguageModule',
+        ),
           )
       ),
       'components' => CMAP::mergeArray($params['components.common'], array(
         //specify our backend specific components here
+         /* load bootstrap components */
+        'bootstrap' => array(
+          'class' => 'common.extensions.bootstrap.components.Bootstrap',
+          'responsiveCss' => true,
+        ),
         'user' => array(
           'allowAutoLogin' => true,
         ),
@@ -81,7 +91,7 @@ return CMap::mergeArray(
           // @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
           'errorAction' => 'site/error'
         ),
-			'db' => array(
+        'db' => array(
           'connectionString' => $params['db.connectionString'],
           'username' => $params['db.username'],
           'password' => $params['db.password'],
@@ -91,10 +101,12 @@ return CMap::mergeArray(
           'charset' => 'utf8'
         ),
         'urlManager' => array(
+          // Set the baseurl as we modified the .htaccess
+          'baseurl' => 'http://'.$_SERVER['HTTP_HOST'].'/baseproject/backend',
           'urlFormat' => 'path',
           'showScriptName' => false,
           'urlSuffix' => '/',
-          'rules' => $params['url.rules']
+          'rules' => $params['url.rules'],
         ),
           /* make sure you have your cache set correctly before uncommenting */
           /* 'cache' => $params['cache.core'], */

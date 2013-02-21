@@ -7,4 +7,7 @@
  * Time: 8:30 PM
  */
 ?>
-This is index view file...
+<?php echo Yii::t('global', 'This is index Page...'); ?><br />
+<?php echo Yii::t('global', 'Hidden Brains'); ?>
+<br />
+<?php echo Yii::t('global', 'Admin'); ?>

@@ -59,6 +59,13 @@ return CMap::mergeArray(array(
         'file' => array(
           'class' => 'common.extensions.cfile.CFile',
         ),
+        /* if you are using Lanugage tranlation via Database [start] */
+        //Comment this component if you are not using language translation or language module
+        'messages' => array(
+          'class' => 'CDbMessageSource',
+          'cacheID' => 'cache',
+        ),
+        /* if you are using Lanugage tranlation [end] */
         /*
          * TWIG Template renderer[start]
          */
@@ -81,9 +88,34 @@ return CMap::mergeArray(array(
             'jencode' => 'CJSON::encode',
           ),
         ),
-      /*
-       * TWIG Template renderer[End]
-       */
+        /*
+         * TWIG Template renderer[End]
+         */
+
+        /* USER Module[start] */
+        'email' => array(
+          'class' => 'common.modules.users.extensions.mailer.EMailer',
+          'pathViews' => 'common.modules.users.views.email',
+          'pathLayouts' => 'common.modules.users.views.email.layouts'
+        ),
+        'func' => array(
+          'class' => 'common.modules.users.components.Functions',
+        ),
+        'authManager' => array(
+          'class' => 'common.modules.users.components.AuthManager',
+          'connectionID' => 'db',
+          'itemTable' => 'AuthItem',
+          'itemChildTable' => 'AuthItemChild',
+          'assignmentTable' => 'AuthAssignment',
+          'defaultRoles' => array('guest'),
+        ),
+        'user' => array(
+          'class' => 'common.modules.users.components.CustomWebUser',
+          'allowAutoLogin' => true,
+          'autoRenewCookie' => true,
+          'identityCookie' => array('domain' => '.'),
+        ),
+      /* USER Module[end] */
       ),
       /*
        * Add our Common modules here
@@ -98,6 +130,10 @@ return CMap::mergeArray(array(
           'generatorPaths' => array(
             'bootstrap.gii'
           )
+        ),
+        //Users Module
+        'users' => array(
+          'class' => 'common.modules.users.UsersModule',
         ),
       ),
         ), CMap::mergeArray($commonEnvParams, $commonParamsLocal));
