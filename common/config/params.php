@@ -114,8 +114,23 @@ return CMap::mergeArray(array(
           'allowAutoLogin' => true,
           'autoRenewCookie' => true,
           'identityCookie' => array('domain' => '.'),
+          'stateKeyPrefix' => 'usersession_',
         ),
-      /* USER Module[end] */
+        /* USER Module[end] */
+        /*
+         * Session Component Initialization Starts
+         */
+        'session' => array(
+          'sessionName' => 'session',
+          'class' => 'CDbHttpSession',
+          'autoCreateSessionTable' => false,
+          'connectionID' => 'db',
+          'sessionTableName' => 'Session',
+          'timeout' => 300,
+        ),
+      /*
+       * Session Component Initialization Ends
+       */
       ),
       /*
        * Add our Common modules here

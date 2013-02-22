@@ -11,6 +11,7 @@ class LoginController extends Controller {
    * Controller constructor
    */
   public function init() {
+    
     // Do not allow logged in users here
     if (Yii::app()->user->id) {
       $this->redirect(Yii::app()->baseUrl);
@@ -43,7 +44,7 @@ class LoginController extends Controller {
    * Login action
    */
   public function actionindex() {
-    
+
     $model = new LoginForm;
     //if(count($_POST)) {echo 111; exit;}
 
@@ -57,13 +58,13 @@ class LoginController extends Controller {
           Yii::app()->user->setFlash('success', Yii::t('login', 'Thanks. You are now logged in.'));
           //Yii::app()->user->login($identity, (Yii::app()->params['loggedInDays'] * 60 * 60 * 24 ));
           Yii::app()->user->login($identity, 0);
-          
         }
-//        // echo Yii::app()->user->role,'  ', AuthManager::Admin; 
-//        if(Yii::app()->user->role == AuthManager::Admin){
-//          echo "helloooooooooooooo";exit();
-//        }
-        
+        if (Yii::app()->user->role == AuthManager::Admin) {
+          // print_r(Yii::app()->session->getKeys());
+          
+          $this->redirect(Yii::app()->urlManager->baseUrl.'/backend');
+        }
+
         // Redirect
         $this->redirect('index');
       }

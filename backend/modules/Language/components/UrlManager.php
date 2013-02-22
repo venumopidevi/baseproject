@@ -15,5 +15,9 @@ class UrlManager extends CUrlManager {
     }
     return parent::createUrl($route, $params, $ampersand);
   }
+  
+  public function init(){
+    parent::setBaseUrl('http://localhost/baseproject/');
+  }
 
 }
