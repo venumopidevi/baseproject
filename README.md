@@ -1,7 +1,7 @@
 # YiiBoilerplate
 We use this folder structure setup for our own projects. 
 
-### Overview
+### Overview ###
 
 **YiiBoilerplate**, aims to provide *Yii developers* an application folder structure with sufficient flexibility to satisfy development needs from simple to enterprise applications.
 
