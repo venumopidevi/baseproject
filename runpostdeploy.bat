@@ -1,5 +1,6 @@
 @echo off
 
+
 @setlocal
 
 set BIN_PATH=%~dp0
