@@ -6,7 +6,34 @@ class IndexController extends Controller {
    */
 
   const PAGE_SIZE = 50;
+
   public $defaultAction = 'index';
+
+  /**
+   * Specifies the access control rules.
+   * This method is used by the 'accessControl' filter.
+   * @return array access control rules
+   */
+  public function accessRules() {
+//    return array(
+//      array('allow', // allow all users to perform 'index' and 'view' actions
+//        'actions' => array('index', 'view'),
+//        'users' => array('*'),
+//      ),
+//      array('allow', // allow authenticated user to perform 'create' and 'update' actions
+//        'actions' => array('create', 'update'),
+//        'users' => array('@'),
+//      ),
+//      array('allow', // allow admin user to perform 'admin' and 'delete' actions
+//        'actions' => array('admin', 'delete'),
+//        'users' => array('admin'),
+//      ),
+//      array('deny', // deny all users
+//        'users' => array('*'),
+//      ),
+//    );
+  }
+
   public function actionIndex() {
 
     if (isset($_POST['bulkoperations']) && $_POST['bulkoperations'] != '') {
@@ -69,20 +96,21 @@ class IndexController extends Controller {
       $model->scenario = 'register';
 
       if ($model->save()) {
-         $lastID = Yii::app()->db->lastInsertID; //User ID 
+        $lastID = Yii::app()->db->lastInsertID; //User ID 
         // Loop through the roles and assign them
-        if(Yii::app()->authManager->doAuthAssignmentViaAdmin($lastID)){
-            Yii::app()->user->setFlash('success', Yii::t('adminmembers', 'User Added.'));
-        }else{
-            Yii::app()->user->setFlash('Error', Yii::t('adminmembers', 'User was Added but could assign rights.'));
+        if (Yii::app()->authManager->doAuthAssignmentViaAdmin($lastID)) {
+          Yii::app()->user->setFlash('success', Yii::t('adminmembers', 'User Added.'));
         }
-        
+        else {
+          Yii::app()->user->setFlash('Error', Yii::t('adminmembers', 'User was Added but could assign rights.'));
+        }
+
         $this->redirect(array('viewuser', 'id' => $model->id));
       }
     }
-    
+
     $temp = Yii::app()->authManager->getAuthItems();
-    
+
     $items = array(CAuthItem::TYPE_ROLE => array(), CAuthItem::TYPE_TASK => array(), CAuthItem::TYPE_OPERATION => array());
     if (count($temp)) {
       foreach ($temp as $item) {
@@ -98,7 +126,6 @@ class IndexController extends Controller {
     $this->breadcrumbs[Yii::t('adminmembers', 'Users')] = '../../index';
     $this->breadcrumbs[Yii::t('adminmembers', 'Adding User')] = '';
     // $this->pageTitle[] = Yii::t('adminmembers', 'Adding User');
-
     // Display form
     $this->render('user_form', array('items_selected' => $items_selected, 'items' => $items, 'model' => $model, 'label' => Yii::t('adminmembers', 'Adding User')));
   }
@@ -138,7 +165,7 @@ class IndexController extends Controller {
           }
 
           Yii::app()->user->setFlash('success', Yii::t('adminmembers', 'User Updated.'));
-          $this->redirect(array('users/viewuser', 'id' => $model->id));
+          $this->redirect(array('index/viewuser', 'id' => $model->id));
         }
       }
 
@@ -158,13 +185,12 @@ class IndexController extends Controller {
           $items_selected[$item_selected->type][$item_selected->name] = $item_selected->name;
         }
       }
-      
+
       $model->password = '';
 
       $this->breadcrumbs[Yii::t('adminmembers', 'Users')] = '../../index';
       $this->breadcrumbs[Yii::t('adminmembers', 'Editing User')] = '';
       // $this->pageTitle[] = Yii::t('adminmembers', 'Editing User');
-
       // Display form
       $this->render('user_form', array('items_selected' => $items_selected, 'items' => $items, 'model' => $model, 'label' => Yii::t('adminmembers', 'Editing User')));
     }
@@ -195,10 +221,9 @@ class IndexController extends Controller {
    */
   public function actionviewuser() {
     if (isset($_GET['id']) && ($model = Users::model()->findByPk($_GET['id']) )) {
-        $this->breadcrumbs[Yii::t('adminmembers', 'Users')] = '../../index';
-        $this->breadcrumbs[Yii::t('adminmembers', 'Viewing User')] = '';
+      $this->breadcrumbs[Yii::t('adminmembers', 'Users')] = '../../index';
+      $this->breadcrumbs[Yii::t('adminmembers', 'Viewing User')] = '';
       // $this->pageTitle[] = Yii::t('adminmembers', 'Viewing User');
-
       // Display
       $this->render('user_view', array('model' => $model, 'label' => Yii::t('adminmembers', 'Viewing User')));
     }

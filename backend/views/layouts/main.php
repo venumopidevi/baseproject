@@ -33,26 +33,26 @@
 			'items' => array(
 				array('label' => 'Home', 'url' => array('/site/index')),
 				array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-				array('label' => 'Contact', 'url' => array('/site/contact')),
-				array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+				
+                                array('label' => 'Users', 'url' => array('/users')),
+                                array('label' => 'Roles', 'url' => array('/users/roles')),
+				array('label' => 'Login', 'url' => array('site/login'), 'visible' => Yii::app()->user->isGuest),
 				array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
 			),
 		),
 		'<form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form>',
-		(!Yii::app()->user->isGuest) ? '<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>' : '',
+		(!Yii::app()->user->isGuest) ? '<p class="navbar-text pull-right">Logged in as <a href="#">(' . Yii::app()->user->name . ')</a></p>' : '',
 		array(
 			'class' => 'bootstrap.widgets.TbMenu',
 			'htmlOptions' => array('class' => 'pull-right'),
 			'items' => array(
 				array('label' => 'Link', 'url' => '#'),
 				'---',
-				array('label' => 'Dropdown', 'url' => '#', 'items' => array(
-					array('label' => 'Action', 'url' => '#'),
-					array('label' => 'Another action', 'url' => '#'),
-					array('label' => 'Something else here', 'url' => '#'),
-					'---',
-					array('label' => 'Separated link', 'url' => '#'),
-				)),
+				array('label' => 'Modules', 'url' => '#', 'items' => array_values(Yii::app()->menuGenerator->getModulesList())
+//                                        array(
+//					array('label' => 'Action', 'url' => '#'),
+//				
+				),
 			),
 		),
 	),

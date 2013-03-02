@@ -1,7 +1,7 @@
 <?php
 /**
  * error.php
- *
+ *error
  * General view file to display error messages
  * Change to suit your needs.
  *
@@ -15,7 +15,7 @@ $this->pageTitle .= ' - Error';
 ?>
 
 <div class="error_page">
-	<div><?php echo CHtml::encode($message) ?></div>
+  <div><?php echo CHtml::encode($message) ?></div>
 
 	<small>(Error <?php echo $code ?>)</small>
 </div><!-- .error_page -->

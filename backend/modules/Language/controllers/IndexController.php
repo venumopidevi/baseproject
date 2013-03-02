@@ -288,31 +288,35 @@ class IndexController extends CController {
   public function actionaddlanguage() {
 
     $model = new Language;
-
+     
     if (isset($_POST['Language'])) {
 
       $model->attributes = $_POST['Language'];
 
       $langCode = $model->language_code;
       $langImage = CUploadedFile::getInstance($model, 'language_image');
+      if(!is_null($langImage)){
+          
+            if (($pos = strrpos($langImage, '.')) !== false) {
+              $extension = substr($langImage, $pos + 1);
+            }
 
-      if (($pos = strrpos($langImage, '.')) !== false) {
-        $extension = substr($langImage, $pos + 1);
-      }
+            $model->language_image = $langImage;
 
-      $model->language_image = $langImage;
+            $model->language_image->saveAs(Yii::app()->basePath . '/www/images/lang_flags/lang_' . $langCode . '.' . $extension);
+            $model->language_image = 'lang_' . $langCode . '.' . $extension;
 
-      $model->language_image->saveAs(Yii::app()->basePath . '/www/images/lang_flags/lang_' . $langCode . '.' . $extension);
-      $model->language_image = 'lang_' . $langCode . '.' . $extension;
+            // $model->getLanguageFile($langCode);    
 
-      // $model->getLanguageFile($langCode);    
-
-      if ($model->save()) {
-        Yii::app()->user->setFlash('success', Yii::t('adminlanguages', 'Language Added.'));
-        $this->redirect(array('index'));
-      }
-      else if (isset($_POST['preview'])) {
-        $model->attributes = $_POST['Language'];
+            if ($model->save()) {
+              Yii::app()->user->setFlash('success', Yii::t('adminlanguages', 'Language Added.'));
+              $this->redirect(array('index'));
+            }
+            else if (isset($_POST['preview'])) {
+              $model->attributes = $_POST['Language'];
+            }
+      }else{
+          Yii::app()->user->setFlash('Error', Yii::t('Language Image', 'Please upload image for a language.'));
       }
     }
 

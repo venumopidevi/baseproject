@@ -21,6 +21,7 @@ Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 Yii::setPathOfAlias('backend', $root . DIRECTORY_SEPARATOR . 'backend');
 Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 Yii::setPathOfAlias('www', $root . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'www');
+Yii::setPathOfAlias('folder', $root . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'www');
 
 $mainLocalFile = $frontendConfigDir . DIRECTORY_SEPARATOR . 'main-local.php';
 $mainLocalConfiguration = file_exists($mainLocalFile) ? require($mainLocalFile) : array();
@@ -64,6 +65,9 @@ return CMap::mergeArray(
       // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
       'modules' => CMap::mergeArray($params['modules.common'], array(
           //specify  your frontend specific modules here
+		'forum'=>array(
+        				'class'=>'application.modules.yii-forum.YiiForumModule',
+    				),
           )
       ),
       'components' => CMAP::mergeArray($params['components.common'], array(
@@ -74,7 +78,7 @@ return CMap::mergeArray(
           'responsiveCss' => true,
         ),
         'reqeust'=>array(
-          'baseUrl' => 'http://'.$_SERVER['HTTP_HOST'].'/baseproject/',
+          'baseUrl' => $params['frontendurl'],
         ),
         
         'errorHandler' => array(
@@ -92,7 +96,7 @@ return CMap::mergeArray(
         ),
         'urlManager' => array(
           // Set the baseurl as we modified the .htaccess
-          'baseurl' => 'http://'.$_SERVER['HTTP_HOST'].'/baseproject',
+          'baseurl' => $params['frontendurl'],
           'urlFormat' => 'path',
           'showScriptName' => false,
           'urlSuffix' => '/',

@@ -19,6 +19,7 @@ $params = require_once($backendConfigDir . DIRECTORY_SEPARATOR . 'params.php');
 Yii::setPathOfAlias('root', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 Yii::setPathOfAlias('backend', $root . DIRECTORY_SEPARATOR . 'backend');
+Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 Yii::setPathOfAlias('www', $root . DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR . 'www');
 /* uncomment if you need to use frontend folders */
 /* Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend'); */
@@ -102,7 +103,7 @@ return CMap::mergeArray(
         ),
         'urlManager' => array(
           // Set the baseurl as we modified the .htaccess
-          'baseurl' => 'http://'.$_SERVER['HTTP_HOST'].'/baseproject/backend',
+          'baseurl' => $params['backendurl'],
           'urlFormat' => 'path',
           'showScriptName' => false,
           'urlSuffix' => '/',

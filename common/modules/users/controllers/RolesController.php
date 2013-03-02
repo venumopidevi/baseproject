@@ -14,7 +14,7 @@ class RolesController extends Controller {
    * Index action
    */
   public function actionIndex() {
-    
+
     // Load members and display
     $criteria = new CDbCriteria;
 
@@ -45,11 +45,11 @@ class RolesController extends Controller {
   public function actionaddauthitem() {
 
     $model = new AuthItem;
-    
+
     if (isset($_POST['AuthItem'])) {
 
       $model->attributes = $_POST['AuthItem'];
-      if ($model->validate()) {        
+      if ($model->validate()) {
         // echo Yii::app()->db->tablePrefix;exit;
         // Create an auth item based on those parameters
         Yii::app()->authManager->createAuthItem($model->name, $model->type, $model->description, $model->bizrule, $model->data ? $model->data : null );
@@ -193,7 +193,7 @@ class RolesController extends Controller {
     $parent = isset($_GET['parent']) && $_GET['parent'] != '' ? $_GET['parent'] : null;
     echo $parent;
     if (!$parent) {
-    echo "Not";    
+      echo "Not";
       Yii::app()->user->setFlash('error', Yii::t('adminroles', 'Could not find that item.'));
       $this->redirect(array('roles/index'));
     }
@@ -242,6 +242,73 @@ class RolesController extends Controller {
 
     Yii::app()->user->setFlash('success', Yii::t('adminroles', 'Auth Item Deleted.'));
     $this->redirect(array('roles/viewauthitem', 'parent' => $parent));
+  }
+
+  public function actionBatch() {
+    $model = new AuthItem;
+    //echo '<pre>';
+    $savedAuthItems = CHtml::listData(AuthItem::model()->findAll(array('select' => 'name')),'name','name');
+    $data['AuthItems'] = Yii::app()->autoListCom->getAllControllersList(true,$savedAuthItems); 
+    
+    //print_r($data['AuthItems']); exit;
+    $data['controller'] = 'controller';
+    $data['TASK'] = 1;
+    $data['ROLE'] = 2;
+    $data['OPERATION'] = 0;
+    if (isset($_POST['AuthItem'])) {
+      $valid = true;
+      $taskName = '';
+      foreach ($_POST['AuthItem'] as $i => $item) {
+        $model = new AuthItem;
+        if (isset($_POST['AuthItem'][$i]) && isset($_POST['insert'][$i])) {
+
+          $model->isNewRecord = true;
+          $valid = true;
+          $model->attributes = $_POST['AuthItem'][$i];
+          $valid = $model->validate() && $valid;
+
+          //adding task or operation
+          if ($valid) {
+
+            $taskName = $model->name;
+            Yii::app()->authManager->createAuthItem($model->name, $model->type, $model->description, $model->bizrule, $model->data ? $model->data : null );
+          }
+          else {
+            //to refresh for next loop
+            unset($valid);
+          }
+
+          //setting operation as child of task
+          if ($model->type == 0) {
+            //sr no of task
+            //echo '<br/> in type 0',$_POST['insertChild'][$i];
+            $srNo = $_POST['insertChild'][$i];
+            if (isset($_POST['insert'][$srNo])) {
+              $parentAuthItem = $_POST['AuthItem'][$srNo]['name'];
+              $condition = 'name like (:authItemName)';
+              $n = AuthItem::model()->count($condition, array('authItemName' => $parentAuthItem));
+
+              //Adding operation as child to task
+              $objAuthItemChild = new AuthItemChild();
+
+              $objAuthItemChild->parent = $parentAuthItem;
+              $objAuthItemChild->child = $model->name;
+              if (!$objAuthItemChild->validate()) {
+                //check for error
+              }
+            }
+          }
+        }
+      }
+      if (!isset($_POST['insert']) || count($_POST['insert']) < 1) {
+        $model->addError('name', 'Please select auth item.');
+      }
+      //if($valid) // all items are valid
+      // ...do something here
+    }
+    $data['model'] = $model;
+    $data['authItemChildModel'] = new AuthItemChild;
+    $this->render('authitem_form_batch', $data);
   }
 
 }

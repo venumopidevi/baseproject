@@ -17,6 +17,7 @@ class UsersModule extends CWebModule {
     if (parent::beforeControllerAction($controller, $action)) {
       // this method is called before any module controller action is performed
       // you may place customized code here
+      Yii::app()->controller->id;
       return true;
     }
     else

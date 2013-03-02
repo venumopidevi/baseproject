@@ -6,6 +6,7 @@
 class AuthManager extends CDbAuthManager {
 
     const Admin = "Admin";
+    private $_adminRole = "Admin";
     public function init() {
 
         // Run the parent
@@ -20,6 +21,12 @@ class AuthManager extends CDbAuthManager {
                 }
             }
         }
+    }
+    /*
+     * Get the AdminRole 
+     */
+    public function getAdminRole(){
+      return $this->_adminRole;
     }
 
     /*

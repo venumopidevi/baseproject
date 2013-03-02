@@ -1,0 +1,11 @@
+# sudo chmod -Rf 777 /path/to/baseproject/backend/www/assets
+# sudo chmod -Rf 777 /path/to/baseproject/backend/runtime
+# sudo chmod -Rf 777 /path/to/baseproject/backend/components/
+# sudo chmod -Rf 777 /path/to/baseproject/backend/models/
+# sudo chmod -Rf 777 /path/to/baseproject/backend/www/images/lang_flags/
+
+/path/to/baseproject/backend/www/assets
+/path/to/baseproject/backend/runtime
+
+/path/to/baseproject/frontend/www/assets
+/path/to/baseproject/frontend/runtime

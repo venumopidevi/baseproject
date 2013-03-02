@@ -12,6 +12,9 @@
  * Please put environment-sensitive parameters in env/params-{environmentcode}.php
  */
 $commonConfigDir = dirname(__FILE__);
+$str = dirname($_SERVER['PHP_SELF']);
+$webRootPrefix = substr($str,0,strpos($str,'/www'));  
+$webRootPrefix = substr($webRootPrefix,0,strrpos($webRootPrefix,'/'));
 
 // get local parameters in
 $commonParamsLocalFile = $commonConfigDir . DIRECTORY_SEPARATOR . 'params-local.php';
@@ -91,6 +94,11 @@ return CMap::mergeArray(array(
         /*
          * TWIG Template renderer[End]
          */
+          
+          //Menu generator component
+        'menuGenerator' => array(
+          'class' => 'common.components.MenuGenerator',
+        ),
 
         /* USER Module[start] */
         'email' => array(
@@ -107,7 +115,7 @@ return CMap::mergeArray(array(
           'itemTable' => 'AuthItem',
           'itemChildTable' => 'AuthItemChild',
           'assignmentTable' => 'AuthAssignment',
-          'defaultRoles' => array('guest'),
+          'defaultRoles' => array('Guest'),
         ),
         'user' => array(
           'class' => 'common.modules.users.components.CustomWebUser',
@@ -115,6 +123,7 @@ return CMap::mergeArray(array(
           'autoRenewCookie' => true,
           'identityCookie' => array('domain' => '.'),
           'stateKeyPrefix' => 'usersession_',
+          'loginUrl' => array('users/login'),
         ),
         /* USER Module[end] */
         /*
@@ -128,9 +137,18 @@ return CMap::mergeArray(array(
           'sessionTableName' => 'Session',
           'timeout' => 300,
         ),
-      /*
-       * Session Component Initialization Ends
-       */
+        /*
+         * Session Component Initialization Ends
+         */
+        'errorHandler' => array(
+          'errorAction' => 'site/error',
+        ),
+        /*
+         * Loading autolist component 
+         */
+        'autoListCom' => array(
+          'class' => 'common.components.AutoList',
+        ),
       ),
       /*
        * Add our Common modules here
@@ -150,5 +168,9 @@ return CMap::mergeArray(array(
         'users' => array(
           'class' => 'common.modules.users.UsersModule',
         ),
+          
       ),
+      'webRootPrefix' => $webRootPrefix,
+      'frontendurl' => 'http://'. $_SERVER['HTTP_HOST'] . $webRootPrefix,
+      'backendurl' => 'http://' . $_SERVER['HTTP_HOST'] . $webRootPrefix.'/backend',
         ), CMap::mergeArray($commonEnvParams, $commonParamsLocal));

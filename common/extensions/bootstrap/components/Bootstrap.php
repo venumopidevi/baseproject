@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bootstrap class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -83,7 +84,7 @@ class Bootstrap extends CApplicationComponent
 	 * Initializes the component.
 	 */
 	public function init()
-	{
+	{ 
 		// Register the bootstrap path alias.
 		if (Yii::getPathOfAlias('bootstrap') === false)
 			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__) . '/..'));

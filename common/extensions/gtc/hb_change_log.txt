@@ -1,0 +1,19 @@
+Changelog 
+--------------------------------------------------
+Date : 16feb13
+
+Chages done with respect to boiler plate arch are listed below:
+1. Class /gtc/fullCrud/FullCrudGenerator
+   1.1) CodeModel property is modified as follows:
+        public $codeModel='common.extensions.gtc.fullCrud.FullCrudCode';
+   1.2) $gtcpath was set as follows on line 27 at gtc/fullcrud/FullCrudCode.php :
+        $gtcpath = Yii::getPathOfAlias('common.extensions.gtc.vendors');    
+
+2. Class /gtc/fullModel/FullModelGenerator
+   1.1) CodeModel property is modified as follows:
+	public $codeModel='common.extensions.gtc.fullModel.FullModelCode';
+   1.2) $gtcpath was set as follows on line 27 at gtc/fullcrud/FullCrudCode.php :
+        $gtcpath = Yii::getPathOfAlias('common.extensions.gtc.vendors');    
+    
+
+
