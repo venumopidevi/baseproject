@@ -8,7 +8,6 @@ class CustomWebUser extends CWebUser
 	 * @var object
 	 */
 	private $_model = null;
-	public $isAdmin = false;
 	
 	/**
 	 * This is here since there is a bug with cookies
@@ -65,5 +64,4 @@ class CustomWebUser extends CWebUser
         }
         return $this->_model;
     }
-
 }
