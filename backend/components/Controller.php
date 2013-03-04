@@ -13,18 +13,18 @@ class Controller extends CController {
   public $menu = array();
 
   public function beforeAction($action) {
-      if (Yii::app()->user->id>0) {
-      if(Yii::app()->user->role == Yii::app()->authManager->adminRole){
-          return true;
+    if (Yii::app()->user->id > 0) {
+      if (Yii::app()->user->role == Yii::app()->authManager->adminRole) {
+        return true;
       }
       $accessRulePrefix = 'backend_controllers';
-      if(Yii::app()->controller->module){
-          $appBase = substr(Yii::app()->basePath,0,strrpos(Yii::app()->basePath,'/')+1);
-          $subject = Yii::app()->controller->module->controllerPath;
-          $accessRulePrefix = str_replace(DIRECTORY_SEPARATOR,'_',str_replace($appBase, '', $subject));
+      if (Yii::app()->controller->module) {
+        $appBase = substr(Yii::app()->basePath, 0, strrpos(Yii::app()->basePath, '/') + 1);
+        $subject = Yii::app()->controller->module->controllerPath;
+        $accessRulePrefix = str_replace(DIRECTORY_SEPARATOR, '_', str_replace($appBase, '', $subject));
       }
-      $accessRule = 'op_'.$accessRulePrefix.'_' . Yii::app()->controller->id . '_' . $action->id;
-      
+      $accessRule = 'op_' . $accessRulePrefix . '_' . Yii::app()->controller->id . '_' . $action->id;
+
       try {
         if (Yii::app()->user->checkAccess($accessRule)) {
           return true;
@@ -41,6 +41,14 @@ class Controller extends CController {
     else {
       $this->redirect(Yii::app()->params->frontendurl . '/users/login');
     }
+  }
+
+  public function init() {
+
+    Yii::app()->params['ckEditorUrl'] = Yii::app()->params['frontendurl'] . '/common/extensions/bootstrap/assets/js/ckeditor/';
+    $_SESSION['KCFINDER']['disabled'] = false; // enables the file browser in the admin
+    $_SESSION['KCFINDER']['uploadURL'] = Yii::app()->baseUrl . "/editoruploads/"; // URL for the uploads folder
+    $_SESSION['KCFINDER']['uploadDir'] = Yii::app()->basePath . "/www/editoruploads/";
   }
 
 }

@@ -31,16 +31,15 @@ $mainEnvConfiguration = file_exists($mainEnvFile) ? require($mainEnvFile) : arra
 
 return CMap::mergeArray(
         array(
-       'name' => 'Base Project',
+      'name' => 'Base Project',
       // @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
       'basePath' => 'frontend',
-      
       // set parameters
       'params' => CMap::mergeArray($params, array(
       )),
       // preload components required before running applications
       // @see http://www.yiiframework.com/doc/api/1.1/CModule#preload-detail
-      'preload' => array('bootstrap','log'),
+      'preload' => array('bootstrap', 'log'),
       // @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail      
       'language' => 'en',
       'sourceLanguage' => 'en',
@@ -64,23 +63,22 @@ return CMap::mergeArray(
       /* uncomment and set if required */
       // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
       'modules' => CMap::mergeArray($params['modules.common'], array(
-          //specify  your frontend specific modules here
-		'forum'=>array(
-        				'class'=>'application.modules.yii-forum.YiiForumModule',
-    				),
+        //specify  your frontend specific modules here
+        'forum' => array(
+          'class' => 'application.modules.forum.ForumModule',
+        ),
           )
       ),
       'components' => CMAP::mergeArray($params['components.common'], array(
         //specify our frontend specific components here
-          /* load bootstrap components */
+        /* load bootstrap components */
         'bootstrap' => array(
           'class' => 'common.extensions.bootstrap.components.Bootstrap',
           'responsiveCss' => true,
         ),
-        'reqeust'=>array(
+        'reqeust' => array(
           'baseUrl' => $params['frontendurl'],
         ),
-        
         'errorHandler' => array(
           // @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
           'errorAction' => 'site/error'
@@ -109,8 +107,6 @@ return CMap::mergeArray(
             '<language:\w{2}>/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
           )),
         ),
-        
-        
           /* make sure you have your cache set correctly before uncommenting */
           /* 'cache' => $params['cache.core'], */
           /* 'contentCache' => $params['cache.content'] */

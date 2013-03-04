@@ -19,7 +19,7 @@ nbproject
 
 # mac deployment helpers
 switch
-index
+/index
 
 # runtime and cache directories
 /backend/www/assets

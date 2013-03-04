@@ -40,8 +40,7 @@ class Controller extends CController {
     parent::init();
   }
 
-  public function beforeAction($action) {
-
+  public function beforeAction($action) {    
     $accessRulePrefix = 'frontend_controllers';
     if (Yii::app()->controller->module) {
       $appBase = substr(Yii::app()->basePath, 0, strrpos(Yii::app()->basePath, '/') + 1);

@@ -148,7 +148,7 @@ return CMap::mergeArray(array(
          */
         'autoListCom' => array(
           'class' => 'common.components.AutoList',
-        ),
+        ),               
       ),
       /*
        * Add our Common modules here
@@ -167,8 +167,7 @@ return CMap::mergeArray(array(
         //Users Module
         'users' => array(
           'class' => 'common.modules.users.UsersModule',
-        ),
-          
+        ),  
       ),
       'webRootPrefix' => $webRootPrefix,
       'frontendurl' => 'http://'. $_SERVER['HTTP_HOST'] . $webRootPrefix,
