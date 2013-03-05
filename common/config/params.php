@@ -13,8 +13,8 @@
  */
 $commonConfigDir = dirname(__FILE__);
 $str = dirname($_SERVER['PHP_SELF']);
-$webRootPrefix = substr($str,0,strpos($str,'/www'));  
-$webRootPrefix = substr($webRootPrefix,0,strrpos($webRootPrefix,'/'));
+$webRootPrefix = substr($str, 0, strpos($str, '/www'));
+$webRootPrefix = substr($webRootPrefix, 0, strrpos($webRootPrefix, '/'));
 
 // get local parameters in
 $commonParamsLocalFile = $commonConfigDir . DIRECTORY_SEPARATOR . 'params-local.php';
@@ -62,6 +62,13 @@ return CMap::mergeArray(array(
         'file' => array(
           'class' => 'common.extensions.cfile.CFile',
         ),
+        /*
+         * Commonly used functions for Image manipulation with Gd2/Gmagick/Imagick
+         */
+        'image' => array(
+          'class' => 'common.extensions.image.ImageComponent',
+          'driver' => 'Gd',
+        ),
         /* if you are using Lanugage tranlation via Database [start] */
         //Comment this component if you are not using language translation or language module
         'messages' => array(
@@ -72,7 +79,7 @@ return CMap::mergeArray(array(
         /*
          * TWIG Template renderer[start]
          */
-        'viewRenderer' => array(
+        'viewRendererTwig' => array(
           'class' => 'common.extensions.ETwigViewRenderer',
           'twigPathAlias' => 'common.extensions.Twig',
           // All parameters below are optional, change them to your needs
@@ -94,12 +101,26 @@ return CMap::mergeArray(array(
         /*
          * TWIG Template renderer[End]
          */
-          
-          //Menu generator component
+        /*
+         * Smarty Template renderer[start]
+         */
+        'viewRenderer' => array(
+          'class' => 'common.extensions.Smarty.ESmartyViewRenderer',
+          // 'smartyPathAlias' => 'common.extensions.Smarty.libs',
+          // All parameters below are optional, change them to your needs
+          // using .php is not recommended,either .html,.twig or .tpl
+          'fileExtension' => '.tpl', //template file extension
+        //'pluginsDir' => 'application.smartyPlugins',
+        //'configDir' => 'application.smartyConfig',
+        ),
+        /*
+         * Smarty Template renderer[End]
+         */
+
+        //Menu generator component
         'menuGenerator' => array(
           'class' => 'common.components.MenuGenerator',
         ),
-
         /* USER Module[start] */
         'email' => array(
           'class' => 'common.modules.users.extensions.mailer.EMailer',
@@ -148,7 +169,7 @@ return CMap::mergeArray(array(
          */
         'autoListCom' => array(
           'class' => 'common.components.AutoList',
-        ),               
+        ),
       ),
       /*
        * Add our Common modules here
@@ -167,9 +188,9 @@ return CMap::mergeArray(array(
         //Users Module
         'users' => array(
           'class' => 'common.modules.users.UsersModule',
-        ),  
+        ),
       ),
       'webRootPrefix' => $webRootPrefix,
-      'frontendurl' => 'http://'. $_SERVER['HTTP_HOST'] . $webRootPrefix,
-      'backendurl' => 'http://' . $_SERVER['HTTP_HOST'] . $webRootPrefix.'/backend',
+      'frontendurl' => 'http://' . $_SERVER['HTTP_HOST'] . $webRootPrefix,
+      'backendurl' => 'http://' . $_SERVER['HTTP_HOST'] . $webRootPrefix . '/backend',
         ), CMap::mergeArray($commonEnvParams, $commonParamsLocal));
