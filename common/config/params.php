@@ -180,7 +180,7 @@ return CMap::mergeArray(array(
         //specify  our common modules here
         'gii' => array(
           'class' => 'system.gii.GiiModule',
-          'password' => 'clevertech',
+          'password' => 'hiddenbrains',
           'generatorPaths' => array(
             'bootstrap.gii'
           )
