@@ -69,7 +69,8 @@
                       array('label' => Yii::t('global', 'About'), 'url' => array('/site/aboutus')),
                       array('label' => Yii::t('global', 'Contact'), 'url' => array('/site/contact')),
                       array('label' => Yii::t('global', 'Login'), 'url' => array('/users/login'), 'visible' => Yii::app()->user->isGuest),
-                      array('label' => Yii::t('global', 'Logout') .'(' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+                      array('label' => Yii::t('global', 'Register'), 'url' => array('/users/register'), 'visible' => Yii::app()->user->isGuest),
+                      array('label' => Yii::t('global', 'Logout') .'(' . Yii::app()->user->name . ')', 'url' => array('/users/index/logout'), 'visible' => !Yii::app()->user->isGuest)
                     ),
                     'htmlOptions' => array('class' => 'nav'),
                   ));

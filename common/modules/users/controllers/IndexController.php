@@ -233,4 +233,13 @@ class IndexController extends Controller {
     }
   }
 
+  /**
+   * Logs out the current user and redirect to homepage.
+   */
+  public function actionLogout() {
+    Yii::app()->user->logout(true);
+    Yii::app()->user->setFlash('success', Yii::t('members', 'You are now logged out.'));
+    $this->redirect(Yii::app()->homeUrl, true);
+  }
+
 }
