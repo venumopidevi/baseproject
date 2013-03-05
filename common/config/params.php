@@ -104,7 +104,7 @@ return CMap::mergeArray(array(
         /*
          * Smarty Template renderer[start]
          */
-        'viewRenderer' => array(
+        'viewRendererSmarty' => array(
           'class' => 'common.extensions.Smarty.ESmartyViewRenderer',
           // 'smartyPathAlias' => 'common.extensions.Smarty.libs',
           // All parameters below are optional, change them to your needs
