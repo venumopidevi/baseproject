@@ -65,7 +65,7 @@ class AuthManager extends CDbAuthManager {
         $successFlag = true;
         try{
             // Loop through the roles and assign them
-            $authItem = Yii::app()->authManager->getAuthItem('member', null);
+            $authItem = Yii::app()->authManager->getAuthItem('member', null);           
             Yii::app()->authManager->assign($authItem->name, $userId, $authItem->bizrule, $authItem->data);
             $this->assignChildItems($userId,$authItem);
             
@@ -80,14 +80,16 @@ class AuthManager extends CDbAuthManager {
     
     public function assignChildItems($userId,$authItem){
         
-        $authItemsChildren = Yii::app()->authManager->getItemChildren($authItem->name, null);
-        foreach($authItemsChildren as $objAuthChild){
+        $authItemsChildren = Yii::app()->authManager->getItemChildren($authItem->name, null);        
+        foreach($authItemsChildren as $objAuthChild){          
             //Inserting operations
             Yii::app()->authManager->assign($objAuthChild->name, $userId, $objAuthChild->bizrule, $objAuthChild->data);
-            $newChild = Yii::app()->authManager->getItemChildren($objAuthChild->name, null);
-            if($newChild){
-                $this->assignItems($userId,$newChild);
-            }
+//          $newChild = Yii::app()->authManager->getItemChildren($objAuthChild->name, null);
+//             echo "<pre>" . $userId . "<br />";
+//            print_r($newChild);exit;
+//            if($newChild){
+//                $this->assignItems($userId,$newChild);
+//            }
        }
     }
             
