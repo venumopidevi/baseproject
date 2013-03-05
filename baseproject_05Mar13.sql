@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2013 at 09:58 AM
+-- Generation Time: Mar 05, 2013 at 05:15 PM
 -- Server version: 5.5.29
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -33,6 +33,13 @@ CREATE TABLE IF NOT EXISTS `AuthAssignment` (
   `data` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`itemname`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `AuthAssignment`
+--
+
+INSERT INTO `AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
+('Admin', '1', NULL, 'N;');
 
 -- --------------------------------------------------------
 
@@ -88,6 +95,19 @@ INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('op_frontend_controllers_site_index', 0, 'op_frontend_controllers_site_index', '', 'N;'),
 ('op_frontend_controllers_site_login', 0, 'op_frontend_controllers_site_login', '', 'N;'),
 ('op_frontend_controllers_site_logout', 0, 'op_frontend_controllers_site_logout', '', 'N;'),
+('op_frontend_modules_forum_controllers_forum_create', 0, 'op_frontend_modules_forum_controllers_forum_create', '', 'N;'),
+('op_frontend_modules_forum_controllers_forum_delete', 0, 'op_frontend_modules_forum_controllers_forum_delete', '', 'N;'),
+('op_frontend_modules_forum_controllers_forum_index', 0, 'op_frontend_modules_forum_controllers_forum_index', '', 'N;'),
+('op_frontend_modules_forum_controllers_forum_update', 0, 'op_frontend_modules_forum_controllers_forum_update', '', 'N;'),
+('op_frontend_modules_forum_controllers_forum_view', 0, 'op_frontend_modules_forum_controllers_forum_view', '', 'N;'),
+('op_frontend_modules_forum_controllers_post_delete', 0, 'op_frontend_modules_forum_controllers_post_delete', '', 'N;'),
+('op_frontend_modules_forum_controllers_post_update', 0, 'op_frontend_modules_forum_controllers_post_update', '', 'N;'),
+('op_frontend_modules_forum_controllers_thread_create', 0, 'op_frontend_modules_forum_controllers_thread_create', '', 'N;'),
+('op_frontend_modules_forum_controllers_thread_delete', 0, 'op_frontend_modules_forum_controllers_thread_delete', '', 'N;'),
+('op_frontend_modules_forum_controllers_thread_newreply', 0, 'op_frontend_modules_forum_controllers_thread_newreply', '', 'N;'),
+('op_frontend_modules_forum_controllers_thread_update', 0, 'op_frontend_modules_forum_controllers_thread_update', '', 'N;'),
+('op_frontend_modules_forum_controllers_thread_view', 0, 'op_frontend_modules_forum_controllers_thread_view', '', 'N;'),
+('op_frontend_modules_forum_controllers_user_view', 0, 'op_frontend_modules_forum_controllers_user_view', '', 'N;'),
 ('Superadmin', 2, 'Super Admin', '', 'N;'),
 ('task_application_modules_language_controllers_index', 1, 'task_application_modules_language_controllers_index', '', 'N;'),
 ('task_backend_controllers_site', 1, 'task_backend_controllers_site', '', 'N;'),
@@ -96,6 +116,10 @@ INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('task_common_modules_users_controllers_register', 1, 'task_common_modules_users_controllers_register', '', 'N;'),
 ('task_common_modules_users_controllers_roles', 1, 'task_common_modules_users_controllers_roles', '', 'N;'),
 ('task_frontend_controllers_site', 1, 'task_frontend_controllers_site', '', 'N;'),
+('task_frontend_modules_forum_controllers_forum', 1, 'task_frontend_modules_forum_controllers_forum', '', 'N;'),
+('task_frontend_modules_forum_controllers_post', 1, 'task_frontend_modules_forum_controllers_post', '', 'N;'),
+('task_frontend_modules_forum_controllers_thread', 1, 'task_frontend_modules_forum_controllers_thread', '', 'N;'),
+('task_frontend_modules_forum_controllers_user', 1, 'task_frontend_modules_forum_controllers_user', '', 'N;'),
 ('task_roles', 1, 'Task Manage User Roles', '', 'N;');
 
 -- --------------------------------------------------------
@@ -154,13 +178,35 @@ INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('task_frontend_controllers_site', 'op_frontend_controllers_site_index'),
 ('task_frontend_controllers_site', 'op_frontend_controllers_site_login'),
 ('task_frontend_controllers_site', 'op_frontend_controllers_site_logout'),
+('task_frontend_modules_forum_controllers_forum', 'op_frontend_modules_forum_controllers_forum_create'),
+('task_frontend_modules_forum_controllers_forum', 'op_frontend_modules_forum_controllers_forum_delete'),
+('task_frontend_modules_forum_controllers_forum', 'op_frontend_modules_forum_controllers_forum_index'),
+('task_frontend_modules_forum_controllers_forum', 'op_frontend_modules_forum_controllers_forum_update'),
+('task_frontend_modules_forum_controllers_forum', 'op_frontend_modules_forum_controllers_forum_view'),
+('task_frontend_modules_forum_controllers_post', 'op_frontend_modules_forum_controllers_post_delete'),
+('task_frontend_modules_forum_controllers_post', 'op_frontend_modules_forum_controllers_post_update'),
+('task_frontend_modules_forum_controllers_thread', 'op_frontend_modules_forum_controllers_thread_create'),
+('task_frontend_modules_forum_controllers_thread', 'op_frontend_modules_forum_controllers_thread_delete'),
+('task_frontend_modules_forum_controllers_thread', 'op_frontend_modules_forum_controllers_thread_newreply'),
+('task_frontend_modules_forum_controllers_thread', 'op_frontend_modules_forum_controllers_thread_update'),
+('task_frontend_modules_forum_controllers_thread', 'op_frontend_modules_forum_controllers_thread_view'),
+('task_frontend_modules_forum_controllers_user', 'op_frontend_modules_forum_controllers_user_view'),
 ('Admin', 'task_application_modules_language_controllers_index'),
 ('Admin', 'task_backend_controllers_site'),
 ('Admin', 'task_common_modules_users_controllers_index'),
 ('Admin', 'task_common_modules_users_controllers_login'),
 ('Admin', 'task_common_modules_users_controllers_register'),
 ('Admin', 'task_common_modules_users_controllers_roles'),
-('Admin', 'task_frontend_controllers_site');
+('Admin', 'task_frontend_controllers_site'),
+('Admin', 'task_frontend_modules_forum_controllers_forum'),
+('Member', 'task_frontend_modules_forum_controllers_forum'),
+('Admin', 'task_frontend_modules_forum_controllers_post'),
+('Member', 'task_frontend_modules_forum_controllers_post'),
+('Admin', 'task_frontend_modules_forum_controllers_thread'),
+('Member', 'task_frontend_modules_forum_controllers_thread'),
+('Admin', 'task_frontend_modules_forum_controllers_user'),
+('Member', 'task_frontend_modules_forum_controllers_user'),
+('Admin', 'task_roles');
 
 -- --------------------------------------------------------
 
@@ -321,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `forumuser` (
 INSERT INTO `forumuser` (`id`, `siteid`, `name`, `signature`, `firstseen`, `lastseen`) VALUES
 (1, 'admin', 'admin', NULL, 0, 0),
 (2, 'demo', 'demo', NULL, 0, 0),
-(3, '1', 'angel', NULL, 1360937566, 1360937566),
+(3, '1', 'angel', NULL, 1360937566, 1362396557),
 (4, '14', 'peter', NULL, 1361274846, 1361274846),
 (5, '15', 'jhony', NULL, 1361276879, 1361277309);
 
@@ -402,6 +448,26 @@ INSERT INTO `Message` (`id`, `language`, `translation`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `post`
+--
+
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` int(10) unsigned NOT NULL,
+  `thread_id` int(10) unsigned NOT NULL,
+  `editor_id` int(10) unsigned DEFAULT NULL,
+  `content` text NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_post_author` (`author_id`),
+  KEY `FK_post_editor` (`editor_id`),
+  KEY `FK_post_thread` (`thread_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Session`
 --
 
@@ -417,17 +483,32 @@ CREATE TABLE IF NOT EXISTS `Session` (
 --
 
 INSERT INTO `Session` (`id`, `expire`, `data`) VALUES
+('0858ger1nrppbhvlg11euhlb26', 1362406502, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a343a226e757461223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a343a22736f7173223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b),
+('0n1qn7r438000oagnq3to18667', 1362394133, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a333a226f696c223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
 ('242l02ife8sh4p1pviea01g2e2', 1361975598, ''),
 ('2nihm81pls9ldpgi45p01k7rn4', 1362202829, 0x5969692e4343617074636861416374696f6e2e32646164353530322e75736572732f6c6f67696e2e636170746368617c733a333a22766363223b5969692e4343617074636861416374696f6e2e32646164353530322e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b5969692e4343617074636861416374696f6e2e32646164353530322e736974652e636170746368617c733a373a22686f6d756b6274223b5969692e4343617074636861416374696f6e2e32646164353530322e736974652e63617074636861636f756e747c693a313b),
 ('2ov27383k8u2g31p9et6r11h52', 1362053930, 0x5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e636170746368617c733a343a22796a6961223b5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
+('4tdkrm2bnvk0hb0059o6rvkfr5', 1362393320, 0x7573657273657373696f6e5f5f5f72657475726e55726c7c733a33323a222f6261736570726f6a6563742f666f72756d2f666f72756d2f6372656174652f223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a343a22636f7a61223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
+('561at8h399ml3bvi1ar889eua6', 1362407359, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a333a22697762223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
 ('6rfgvamj0ifbiqb68lhq1nb0l5', 1362208362, ''),
 ('9o2f5irobft4uknlkprtfl7se0', 1361966817, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a343a2276617761223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a333b5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e636170746368617c733a343a2263666e65223b5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
+('cdmdj6l03o3f1g63v0ogh0r834', 1362406651, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a363a22676974647861223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b),
 ('epr3k4e7qkm5743pvgvtr80ju1', 1362208183, ''),
+('fgvk2fqhjsv4jp00esh35ek3p3', 1362406570, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a353a2273756d6570223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a373a227369646f6a6e74223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
 ('ghk8ijdemo5khhgu8i9jl5gvh5', 1362229162, ''),
 ('inu22qgtbnhsblnagfmn4gec06', 1361967631, 0x5969692e4343617074636861416374696f6e2e37663439643434362e736974652e636170746368617c733a363a22666163616b6d223b5969692e4343617074636861416374696f6e2e37663439643434362e736974652e63617074636861636f756e747c693a313b6769695f5f72657475726e55726c7c733a32343a222f6261736570726f6a6563742f6261636b656e642f676969223b6769695f5f69647c733a353a227969696572223b6769695f5f6e616d657c733a353a227969696572223b6769695f5f7374617465737c613a303a7b7d5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a343a226a757865223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a333b736573736f696e707265666978636f6d6d6f6e5f5f69647c733a313a2231223b736573736f696e707265666978636f6d6d6f6e5f5f6e616d657c733a31373a2261646d696e40636f6d70616e792e636f6d223b736573736f696e707265666978636f6d6d6f6e6e616d657c733a31333a2241646d696e6973747261746f72223b736573736f696e707265666978636f6d6d6f6e757365726e616d657c733a31333a2241646d696e6973747261746f72223b736573736f696e707265666978636f6d6d6f6e73656f6e616d657c733a31333a2261646d696e6973747261746f72223b736573736f696e707265666978636f6d6d6f6e656d61696c7c733a31373a2261646d696e40636f6d70616e792e636f6d223b736573736f696e707265666978636f6d6d6f6e726f6c657c733a353a2241646d696e223b736573736f696e707265666978636f6d6d6f6e697341646d696e7c623a313b736573736f696e707265666978636f6d6d6f6e5f5f7374617465737c613a363a7b733a343a226e616d65223b623a313b733a383a22757365726e616d65223b623a313b733a373a2273656f6e616d65223b623a313b733a353a22656d61696c223b623a313b733a343a22726f6c65223b623a313b733a373a22697341646d696e223b623a313b7d),
+('jaumc5ppchlgtg8adau9moc4l4', 1362406898, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a343a22796f6269223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a373a226e6c74656a6666223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
+('jsolr3eeggdic5euevvc14hto6', 1362387545, ''),
+('k1kal6ompitbl19dtcm4ik31a5', 1362477177, ''),
+('kihf7qksgdlovef3anfuhbnmm1', 1362408069, ''),
 ('pt57mui7kou0bhagdobql6s7u7', 1362208121, ''),
-('q8b10ju4rehabmvuohrql3crj6', 1362371510, ''),
+('q8b10ju4rehabmvuohrql3crj6', 1362484121, ''),
 ('r7h7r328kjm77lldl8o2adqfk4', 1362225393, ''),
+('tiojgq7e4fqk57s9ql9kbqgt75', 1362406311, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a333a2271656e223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a363a226d6667656675223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
+('tj99268r985s6cvcuunaedg2f4', 1362405973, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a353a226d63706974223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b4b4346494e4445527c613a333a7b733a383a2264697361626c6564223b623a303b733a393a2275706c6f616455524c223b733a33393a222f6261736570726f6a6563742f6261636b656e642f7777772f656469746f7275706c6f6164732f223b733a393a2275706c6f6164446972223b733a34373a222f7661722f7777772f6261736570726f6a6563742f6261636b656e642f7777772f656469746f7275706c6f6164732f223b7d5969692e4343617074636861416374696f6e2e39373866303834622e75736572732f72656769737465722e636170746368617c733a343a2274757765223b5969692e4343617074636861416374696f6e2e39373866303834622e75736572732f72656769737465722e63617074636861636f756e747c693a313b5969692e4343617074636861416374696f6e2e39373866303834622e75736572732f6c6f67696e2e636170746368617c733a373a2263697a656c7564223b5969692e4343617074636861416374696f6e2e39373866303834622e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
+('tshu8i03h94sutjqi58bf272k2', 1362406767, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e636170746368617c733a353a227a666a7572223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f72656769737465722e63617074636861636f756e747c693a313b),
+('ui7sk5djepsobk4auoqvm4vp73', 1362396769, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a363a226a6972737970223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a323b5969692e4343617074636861416374696f6e2e37663439643434362e736974652e636170746368617c733a363a22796f74756769223b5969692e4343617074636861416374696f6e2e37663439643434362e736974652e63617074636861636f756e747c693a313b7573657273657373696f6e5f5f5f69647c733a313a2231223b7573657273657373696f6e5f5f5f6e616d657c733a31373a2261646d696e40636f6d70616e792e636f6d223b7573657273657373696f6e5f6e616d657c733a31333a2241646d696e6973747261746f72223b7573657273657373696f6e5f757365726e616d657c733a31333a2241646d696e6973747261746f72223b7573657273657373696f6e5f73656f6e616d657c733a31333a2261646d696e6973747261746f72223b7573657273657373696f6e5f656d61696c7c733a31373a2261646d696e40636f6d70616e792e636f6d223b7573657273657373696f6e5f726f6c657c733a353a2241646d696e223b7573657273657373696f6e5f697341646d696e7c623a313b7573657273657373696f6e5f5f5f7374617465737c613a363a7b733a343a226e616d65223b623a313b733a383a22757365726e616d65223b623a313b733a373a2273656f6e616d65223b623a313b733a353a22656d61696c223b623a313b733a343a22726f6c65223b623a313b733a373a22697341646d696e223b623a313b7d7573657273657373696f6e5f666f72756d757365725f69647c733a313a2233223b),
+('voqlpt0qltd6tqqgeqas6hd6r2', 1362477274, 0x5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e636170746368617c733a343a22616f6271223b5969692e4343617074636861416374696f6e2e37663439643434362e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
 ('vtkk0thdv6lhol3unc3p2daeg4', 1362030385, 0x5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e636170746368617c733a353a227972627570223b5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b),
 ('vtneost9nn7eorrui6ntjd5ld1', 1362030625, 0x5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e636170746368617c733a333a226b726a223b5969692e4343617074636861416374696f6e2e39366564663137302e75736572732f6c6f67696e2e63617074636861636f756e747c693a313b);
 
@@ -555,14 +636,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `seoname`, `email`, `password`, `joined`, `passwordreset`, `data`, `role`, `ipaddress`, `fbuid`, `fbtoken`) VALUES
-(1, 'Administrator', 'administrator', 'admin@company.com', '1ea6e931749f195b7606790f6172ce0e52f102cc', 1361436249, NULL, NULL, 'Admin', '127.0.0.1', 0, '');
+(1, 'Administrator', 'administrator', 'admin@company.com', '1ea6e931749f195b7606790f6172ce0e52f102cc', 1361436249, NULL, NULL, 'Admin', '127.0.0.1', 0, ''),
+(2, 'hussain', 'hussain', 'hussy@mail.com', '71b7f58e2fd7e80dc08bdbb80694c5df57c52ccc', 1362406800, NULL, NULL, 'Member', '127.0.0.1', 0, '');
 
 --
 -- Constraints for dumped tables
@@ -586,6 +668,14 @@ ALTER TABLE `AuthItemChild`
 --
 ALTER TABLE `forum`
   ADD CONSTRAINT `FK_forum_forum` FOREIGN KEY (`parent_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `FK_post_author` FOREIGN KEY (`author_id`) REFERENCES `forumuser` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_post_editor` FOREIGN KEY (`editor_id`) REFERENCES `forumuser` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_post_thread` FOREIGN KEY (`thread_id`) REFERENCES `thread` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `thread`
