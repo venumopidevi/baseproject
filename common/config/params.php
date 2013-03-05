@@ -66,7 +66,7 @@ return CMap::mergeArray(array(
          * Commonly used functions for Image manipulation with Gd2/Gmagick/Imagick
          */
         'image' => array(
-          'class' => 'common.extensions.imagelib.ImageComponent',
+          'class' => 'common.extensions.image.ImageComponent',
           'driver' => 'Gd',
         ),
         /* if you are using Lanugage tranlation via Database [start] */
